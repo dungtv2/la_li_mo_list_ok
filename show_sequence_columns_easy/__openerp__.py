@@ -4,7 +4,7 @@
     'version': '1.0',
     'category': 'Web',
     'description': """
-        
+
     """,
     'author': "Hanel Software Solution",
     'website': 'http://www.hanelsoft.vn/',
