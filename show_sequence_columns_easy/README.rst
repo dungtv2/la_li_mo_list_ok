@@ -1,21 +1,20 @@
 This module
 ==========================================
-This Functionality of this module was extended from *mrp* of Odoo MRP Team.
-It provides a function to reverse MO When MO consumed.
+Dynamic ListView for Odoo v8
+
+Advantage:
+--------------
+* Saves Tree/List view per user
+* List/Tree view remains changed on page refresh
+* Awesome!
 
 Main features:
 --------------
-* Product Consumed: Reverse from Warehouse Virtual into Warehouse Source
-* Product Finish: Reverse from Warehouse Finish back Warehouse Virtual
+* Upgrade to Odoo v9
 
-To-do:
-------
-
-
-
-Credits
-=======
-
+Contact Us:
+--------------
+* dungtv2@hanelsoft.vn or truongdung.vd@gmail.com
 
 Contributors:
 -------------
