@@ -6,7 +6,7 @@
     'description': """
 
     """,
-    'author': "dungtv2",
+    'author': "Hanel Software Solution",
     'website': 'http://www.hanelsoft.vn/',
     'depends': ['web'],
     'data': ['templates.xml'],
