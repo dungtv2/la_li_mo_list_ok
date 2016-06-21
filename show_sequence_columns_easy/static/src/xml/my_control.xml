@@ -40,6 +40,15 @@
                                  </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <h3>Use Color for ListView</h3>
+                                <div class="checkbox check-primary">
+                                    <input type="checkbox" value="true" id="color_for_list" />
+                                    <label for="color_for_list">Use</label>
+                                </div>
+                            </td>
+                        </tr>
                         <!--<tr>-->
                             <!--<td>-->
                                 <!--<h3>Fix Header</h3>-->
@@ -96,12 +105,22 @@
                     <ul>
                         <t t-foreach="data.suggestion" t-as="suggest">
                             <li>
-
                                 <!--<input style="width: 25px;float: right;height: 16px;line-height: 0px;text-align: center;"></input>-->
                                 <div class="checkbox check-primary" t-att-color="data.attrs.color" t-att-shape="data.attrs.shape">
+                                    <!--<i class="fa fa-cog" title="Settings" aria-hidden="true" t-att-setting="suggest.value" style="-->
+                                            line-height: 100%;
+                                            vertical-align: super;
+                                            margin-right: 5px;
+                                            /* color: #cdcdcd; */
+                                            opacity: 0.5;
+                                        <!--"></i>-->
                                     <input type="checkbox" t-att-value="suggest.value" t-att-sequence="suggest.sequence"
                                            t-att-checked="suggest.checked" t-att-id="suggest.value" />
-                                    <label t-att-for="suggest.value"><input t-att-for="suggest.value" title="Sequence" class="sequence" t-att-value="suggest.sequence"></input><t t-esc="suggest.string" /></label>
+                                    <label t-att-for="suggest.value">
+
+                                        <input t-att-for="suggest.value" title="Sequence" class="sequence" t-att-value="suggest.sequence"></input>
+                                        <t t-esc="suggest.string" />
+                                    </label>
                                 </div>
                             </li>
                         </t>

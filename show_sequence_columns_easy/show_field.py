@@ -13,6 +13,9 @@ class ShowFieldS(models.Model):
     fields_show = fields.Char(string="Fields Show")
     fix_header_list_view = fields.Boolean(string="Fix header List View")
     fields_sequence = fields.Char(string="Sequence")
+    color_for_list = fields.Boolean(string="Use Color/bgcolor for listview")
+    # background_color = fields.Char(string="Background Color of ListView")
+    # color_list_view = fields.Char(string="Color of ListView")
 
     @api.model
     def action(self, vals, action):
@@ -26,7 +29,8 @@ class ShowFieldS(models.Model):
                     self.create(vals)
             else:
                 if len(data) > 0:
-                    data[0].write({'color': vals['color'], 'fix_header_list_view': vals['fix_header_list_view']})
+                    data[0].write({'color': vals['color'], 'fix_header_list_view': vals['fix_header_list_view'],
+                                   'color_for_list': vals['color_for_list']})
                 else:
                     self.create(vals)
         elif action == 'select':
@@ -36,7 +40,8 @@ class ShowFieldS(models.Model):
                 return {'data': {'user_id': data.user_id.id, 'color': data.color, 'model_name': data.model_name,
                                  'fields_show': data.fields_show, 'id': data.id, 'name': data.name,
                                  'fields_sequence': data.fields_sequence,
-                                 'fix_header_list_view': data.fix_header_list_view},
+                                 'fix_header_list_view': data.fix_header_list_view,
+                                 'color_for_list': data.color_for_list},
                         'fields': all_field_obj}
             else:
                 return {'data': {}, 'fields': all_field_obj}

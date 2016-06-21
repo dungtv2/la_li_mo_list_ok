@@ -10,7 +10,7 @@
     'website': 'http://www.hanelsoft.vn/',
     'depends': ['web'],
     'data': ['templates.xml'],
-    'price': 199.99,
+    'price': 250,
     'currency': 'EUR',
     'installable': True,
     'auto_install': False,

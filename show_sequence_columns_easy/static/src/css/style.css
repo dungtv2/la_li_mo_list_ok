@@ -258,3 +258,27 @@ header button{
 .suggestion .radio label, .suggestion .checkbox label{
     margin-right: 25px !important;
 }
+.oe_list.check-danger{
+    color: #f55753 !important;
+    background-color: #ffe6e6 !important;
+}
+.oe_list.check-info{
+    color: #3b4752 !important;
+    background-color: #c2cad6 !important;
+}
+.oe_list.check-success{
+    color: #10cfbd !important;
+    background-color: #d0fbf7 !important;
+}
+.oe_list.check-warning{
+    color: #f8d053 !important;
+    background-color: #fdf1ce !important;
+}
+.oe_list.check-primary{
+    color: #7C7BAD !important;
+    background-color: #d0d0e2 !important;
+}
+.oe_list.check-complete{
+    color: #48b0f7 !important;
+    background-color: #e7f5fe !important;
+}
