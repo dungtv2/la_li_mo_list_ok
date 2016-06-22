@@ -52,7 +52,7 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
         init: function (parent, dataset, fields_view, options) {
             var self = this;
             this._super(parent, dataset, fields_view, options);
-            if (this.fields_view.type == 'tree'){
+            if (this.fields_view.type == 'tree' && typeof(this.fields_view.result) != 'undefined'){
                 var Show_Field = new Model('show.fields');
                 QWeb.add_template("/show_sequence_columns_easy/static/src/xml/my_control.xml");
 //                Show_Field.call('action', [{'model_name': self.model, 'user_id': session.uid}, 'select']).then(function (result) {
