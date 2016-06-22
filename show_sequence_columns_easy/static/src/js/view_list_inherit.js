@@ -46,7 +46,7 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                 });
             })
         },
-    })
+    });
 
     View.include({
         init: function (parent, dataset, fields_view, options) {
@@ -55,7 +55,6 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
             if (this.fields_view.type == 'tree' && typeof(this.fields_view.result) != 'undefined'){
                 var Show_Field = new Model('show.fields');
                 QWeb.add_template("/show_sequence_columns_easy/static/src/xml/my_control.xml");
-//                Show_Field.call('action', [{'model_name': self.model, 'user_id': session.uid}, 'select']).then(function (result) {
                     String.prototype.replaceAll = function(target, replacement) {return this.split(target).join(replacement); };
                     var data_show_field = this.fields_view.result.data || {};
                     self.data_show_field = data_show_field;
@@ -65,10 +64,14 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                     var fields = self.fields_view.fields;
                     var children = self.fields_view.arch.children;
 
-                    var field_visible = data_show_field.hasOwnProperty('fields_show') && data_show_field['fields_show'] ? eval(data_show_field['fields_show'].replaceAll("u'", "'")) : _.pluck(self.visible_columns, 'name');
+                    this._visible_columns = _.filter(this.fields_view.arch.children, function (column) {return column.attrs.invisible != '1'})
+
+                    var field_visible = data_show_field.hasOwnProperty('fields_show') && data_show_field['fields_show'] ? eval(data_show_field['fields_show'].replaceAll("u'", "'")) : _.pluck(_.pluck(self._visible_columns, 'attrs'), 'name');
                     var fields_sequence = data_show_field.hasOwnProperty('fields_sequence') && data_show_field['fields_sequence'] ? JSON.parse(data_show_field['fields_sequence']) : {}
+//                    var fields_string = data_show_field.hasOwnProperty('fields_sequence') && data_show_field['fields_sequence'] ? JSON.parse(data_show_field['fields_sequence']) : {}
 
                     var list_data = [];
+
                     for (var field_name in all_fields_of_model){
                         var field_obj = all_fields_of_model[field_name];
                         var data = {value: field_name, string: field_obj.string}
@@ -95,7 +98,9 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                     for (var _field in _fields_show){
                         _field = _fields_show[_field];
                         children.push({attrs: {modifiers: "", name: _field.value}, children: [], tag: "field"});
-                        field[_field.value] = all_fields_of_model[_field.value]
+                        var f = all_fields_of_model[_field.value];
+//                        f.string = "Hello";
+                        field[_field.value] = f;
                     }
 
                     // prepare children
@@ -112,7 +117,6 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                     self.fields_view.fields = field;
                     console.log('ok');
                     self.fields_view.arch.children = children;
-//                });
             }
         }
     });
@@ -189,12 +193,6 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                     });
                 });
             });
-        }
-    });
-
-    ListView.List.include({
-        init: function(group, opts){
-            this._super(group, opts);
         }
     });
 });
