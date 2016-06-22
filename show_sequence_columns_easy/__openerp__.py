@@ -1,5 +1,5 @@
 {
-    'name': 'Dynamic ListView v8',
+    'name': 'Dynamic ListView v9',
     'summary': 'Change The Odoo List view On the fly without any technical knowledge',
     'version': '1.0',
     'category': 'Web',
@@ -15,4 +15,5 @@
     'installable': True,
     'auto_install': False,
     'application': False,
+    'qweb': ['static/src/xml/listview_button_view.xml'],
 }
