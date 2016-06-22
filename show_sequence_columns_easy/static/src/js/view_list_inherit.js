@@ -99,7 +99,7 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                         _field = _fields_show[_field];
                         children.push({attrs: {modifiers: "", name: _field.value}, children: [], tag: "field"});
                         var f = all_fields_of_model[_field.value];
-//                        f.string = "Hello";
+                        f.string = "Hello";
                         field[_field.value] = f;
                     }
 

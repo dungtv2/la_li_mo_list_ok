@@ -14,6 +14,7 @@ class ShowFieldS(models.Model):
     fix_header_list_view = fields.Boolean(string="Fix header List View")
     fields_sequence = fields.Char(string="Sequence")
     color_for_list = fields.Boolean(string="Use Color/bgcolor for listview")
+    fields_string = fields.Char(string="Fields String")
     # background_color = fields.Char(string="Background Color of ListView")
     # color_list_view = fields.Char(string="Color of ListView")
 
