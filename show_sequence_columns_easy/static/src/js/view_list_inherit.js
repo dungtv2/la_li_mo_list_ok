@@ -68,7 +68,7 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
 
                     var field_visible = data_show_field.hasOwnProperty('fields_show') && data_show_field['fields_show'] ? eval(data_show_field['fields_show'].replaceAll("u'", "'")) : _.pluck(_.pluck(self._visible_columns, 'attrs'), 'name');
                     var fields_sequence = data_show_field.hasOwnProperty('fields_sequence') && data_show_field['fields_sequence'] ? JSON.parse(data_show_field['fields_sequence']) : {}
-//                    var fields_string = data_show_field.hasOwnProperty('fields_sequence') && data_show_field['fields_sequence'] ? JSON.parse(data_show_field['fields_sequence']) : {}
+                    var fields_string = data_show_field.hasOwnProperty('fields_string') && data_show_field['fields_string'] ? JSON.parse(data_show_field['fields_string']) : {}
 
                     var list_data = [];
 
@@ -80,12 +80,14 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                             if (fields_sequence.hasOwnProperty(field_name)){
                                data['sequence'] = fields_sequence[field_name];
                             }
+                            if (fields_string.hasOwnProperty(field_name)){
+                                data['string'] = fields_string[field_name];
+                            }
                         }
                         list_data.push(data);
                     }
                     list_data = _.sortBy(list_data, function (o){return o.sequence});
                     self.data = {suggestion: list_data, attrs: {color: data_show_field.color || 'check-primary'}}
-
 
                     var field = {}, children = [], _fields_show = [];
                     for (var idx in field_visible){
@@ -94,12 +96,13 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                     }
                     _fields_show = _.sortBy(_fields_show, function (o){return o.sequence});
 
-
                     for (var _field in _fields_show){
                         _field = _fields_show[_field];
                         children.push({attrs: {modifiers: "", name: _field.value}, children: [], tag: "field"});
                         var f = all_fields_of_model[_field.value];
-                        f.string = "Hello";
+                        if (fields_string.hasOwnProperty(_field.value)){
+                            f.string = fields_string[_field.value];
+                        }
                         field[_field.value] = f;
                     }
 
@@ -108,14 +111,13 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                     for (var _field in _children){
                         if (_children.hasOwnProperty(_field)){
                             _field = _children[_field]
-                            if (_field.tag == "field" && !field.hasOwnProperty(_field.attrs.name)){
+                            if ((!field.hasOwnProperty(_field.attrs.name) && _field.attrs.invisible == '1') || _field.attrs.name == 'state'){
                                 field[_field.attrs.name] = all_fields_of_model[_field.attrs.name]
                                 children.push(_field);
                             }
                         }
                     }
                     self.fields_view.fields = field;
-                    console.log('ok');
                     self.fields_view.arch.children = children;
             }
         }
@@ -134,8 +136,16 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
                 $node.find(".sequence").change(function () {
                     $(this).parent().prevAll('input').attr({'sequence': $(this).val()});
                 });
+                $node.find(".string_field").change(function () {
+                    $(this).parent().prevAll('input').attr({'string_field': $(this).val()});
+                });
                 $node.find("i[setting]").click(function () {
-                    alert($(this).attr('setting'));
+                    $(this).parent().find('.setting_field').toggle();
+                });
+                $node.find(".update_setting_field").click(function () {
+                    var parent = $(this).parents('.setting_field');
+                    parent.next().attr({string_field: parent.find('.string_field').val(), 'sequence': parent.find('.sequence').val()})
+                    parent.toggle();
                 });
                 this.setting_fields_show($node);
                 this.update_show_fields($node);
@@ -146,15 +156,21 @@ odoo.define('show_sequence_columns_easy.my_listviewok', function (require) {
             node.find('a[action="update"]').click(function () {
                 var fields = []
                 var sequence = {}
+                var fields_string = {}
                 self.$buttons.find('.choose_field_show').find('.suggestion input:checked').each(function () {
                     fields.push($(this).val());
                     var _seq = $(this).attr('sequence') || false;
                     if (_seq){
                         sequence[$(this).attr('id')] = parseInt(_seq);
                     }
+                    var _str = $(this).attr('string_field') || false;
+                    if (_str){
+                        fields_string[$(this).attr('id')] = _str;
+                    }
                 });
                 new Model('show.fields').call('action', [{'model_name': self.model, 'fields_show': fields,
-                'user_id': self.session.uid, 'fields_sequence': JSON.stringify(sequence)}, 'update']).then(function (result) {
+                'user_id': self.session.uid, 'fields_sequence': JSON.stringify(sequence),
+                'fields_string': JSON.stringify(fields_string)}, 'update']).then(function (result) {
                     location.reload();
                 });
             });

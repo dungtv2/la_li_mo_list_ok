@@ -26,13 +26,14 @@ class ShowFieldS(models.Model):
                 if 'fields_show' in vals:
                     vals['fields_show'] = str(vals['fields_show'])
                     if len(data) > 0:
-                        data[0].write({'fields_show': vals['fields_show'], 'fields_sequence': vals['fields_sequence']})
+                        data[0].write({'fields_show': vals['fields_show'], 'fields_sequence': vals['fields_sequence'],
+                                       'fields_string': vals['fields_string']})
                     else:
                         self.create(vals)
                 else:
                     if len(data) > 0:
                         data[0].write({'color': vals['color'], 'fix_header_list_view': vals['fix_header_list_view'],
-                                       'color_for_list': vals['color_for_list']})
+                                       'color_for_list': vals['color_for_list'], 'fields_string': vals['fields_string']})
                     else:
                         self.create(vals)
             elif action == 'select':
@@ -43,7 +44,8 @@ class ShowFieldS(models.Model):
                                      'fields_show': data.fields_show, 'id': data.id, 'name': data.name,
                                      'fields_sequence': data.fields_sequence,
                                      'fix_header_list_view': data.fix_header_list_view,
-                                     'color_for_list': data.color_for_list},
+                                     'color_for_list': data.color_for_list,
+                                     'fields_string': data.fields_string},
                             'fields': all_field_obj}
                 else:
                     return {'data': {}, 'fields': all_field_obj}

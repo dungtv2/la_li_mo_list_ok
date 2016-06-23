@@ -39,11 +39,43 @@
                         <t t-foreach="widget.data.suggestion" t-as="suggest">
                             <li>
                                 <div class="checkbox check-primary" t-att-color="widget.data.attrs.color" t-att-shape="widget.data.attrs.shape">
-                                    <input type="checkbox" t-att-value="suggest.value" t-att-sequence="suggest.sequence"
+                                    <i class="fa fa-cog" title="Settings" aria-hidden="true" t-att-setting="suggest.value" style="
+                                            line-height: 100%;
+                                            vertical-align: middle;
+                                            margin-right: 5px;
+                                            /* color: #cdcdcd; */
+                                            opacity: 0.5;
+                                        "></i>
+                                    <div class="setting_field" style="position: absolute;
+    z-index: 10000;
+    width: 100%;
+    /* height: 50px; */
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px #cdcdcd;
+    border: 1px solid #cccccc;
+    padding: 5px 5px;">
+                                        <table>
+                                            <tr>
+                                                <td>Sequence</td>
+                                                <td><input t-att-for="suggest.value" title="Sequence" class="sequence" t-att-value="suggest.sequence"></input></td>
+                                            </tr>
+                                            <tr>
+                                                <td>String</td>
+                                                <td><input t-att-for="suggest.value" title="String Of Field" class="string_field" t-att-value="suggest.string"></input></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><button t-att-for="suggest.value" class="btn btn-default update_setting_field" style="float: right">Update</button></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    <input type="checkbox" t-att-value="suggest.value" t-att-string_field="suggest.string" t-att-sequence="suggest.sequence"
                                            t-att-checked="suggest.checked" t-att-id="suggest.value" />
                                     <label t-att-for="suggest.value">
 
-                                        <input t-att-for="suggest.value" title="Sequence" class="sequence" t-att-value="suggest.sequence"></input>
+                                        <!--<input t-att-for="suggest.value" title="Sequence" class="sequence" t-att-value="suggest.sequence"></input>-->
+                                        <!--<input t-att-for="suggest.value" title="String Of Field" class="string_field" t-att-value="suggest.string"></input>-->
                                         <t t-esc="suggest.string" />
                                     </label>
                                 </div>

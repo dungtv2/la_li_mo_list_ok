@@ -68,6 +68,7 @@
                 </table>
             </div>
     </t>
+
     <t t-name="ShowField">
         <div class="input-group margin-bottom-sm choose_field_show" t-att-color="data.attrs.color" style="float: right">
             <t t-if="data.attrs.color!='check-base'">
@@ -119,6 +120,7 @@
                                     <label t-att-for="suggest.value">
 
                                         <input t-att-for="suggest.value" title="Sequence" class="sequence" t-att-value="suggest.sequence"></input>
+                                        <input t-att-for="suggest.value" title="String Of Field" class="sequence" t-att-value="suggest.string"></input>
                                         <t t-esc="suggest.string" />
                                     </label>
                                 </div>
