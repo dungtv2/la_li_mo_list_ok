@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <template id="npp_web_interface_templates" name="fix_header_status templates" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/css" href="/fix_header_status/static/src/css/style.css" />
+                <script type="text/javascript" src="/fix_header_status/static/src/js/custom.js"></script>
+                <script type="text/javascript" src="/fix_header_status/static/src/js/view_list_inherit.js"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
