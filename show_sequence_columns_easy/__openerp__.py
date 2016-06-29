@@ -9,7 +9,10 @@
     'author': "Hanel Software Solution",
     'website': 'http://www.hanelsoft.vn/',
     'depends': ['web'],
-    'data': ['templates.xml'],
+    'data': [
+        'templates.xml',
+        'view.xml'
+    ],
     'price': 199.99,
     'currency': 'EUR',
     'installable': True,
